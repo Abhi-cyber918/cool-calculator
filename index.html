@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scientific Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #141E30, #243B55);
+      color: #FFF;
+    }
+
+    .calculator {
+      background: #1E293B;
+      border-radius: 10px;
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5);
+      width: 320px;
+      padding: 20px;
+    }
+
+    .display {
+      background: #0A192F;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      text-align: right;
+    }
+
+    .display input {
+      width: 100%;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: #FFF;
+      font-size: 1.5em;
+      text-align: right;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .buttons button {
+      background: #243B55;
+      border: none;
+      border-radius: 5px;
+      color: #FFF;
+      font-size: 1.2em;
+      padding: 15px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .buttons button:hover {
+      background: #3C516D;
+    }
+
+    .buttons button:active {
+      background: #576F8D;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">
+      <input type="text" id="result" readonly>
+    </div>
+    <div class="buttons">
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">DEL</button>
+      <button onclick="insert('%')">%</button>
+      <button onclick="insert('/')">÷</button>
+      
+      <button onclick="insert('7')">7</button>
+      <button onclick="insert('8')">8</button>
+      <button onclick="insert('9')">9</button>
+      <button onclick="insert('*')">×</button>
+      
+      <button onclick="insert('4')">4</button>
+      <button onclick="insert('5')">5</button>
+      <button onclick="insert('6')">6</button>
+      <button onclick="insert('-')">−</button>
+      
+      <button onclick="insert('1')">1</button>
+      <button onclick="insert('2')">2</button>
+      <button onclick="insert('3')">3</button>
+      <button onclick="insert('+')">+</button>
+      
+      <button onclick="insert('.')">.</button>
+      <button onclick="insert('0')">0</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="insert('**')">^</button>
+      
+      <button onclick="insert('Math.sqrt(')">√</button>
+      <button onclick="insert('Math.sin(')">sin</button>
+      <button onclick="insert('Math.cos(')">cos</button>
+      <button onclick="insert('Math.tan(')">tan</button>
+    </div>
+  </div>
+  <script>
+    function clearDisplay() {
+      document.getElementById("result").value = "";
+    }
+
+    function deleteLast() {
+      const current = document.getElementById("result").value;
+      document.getElementById("result").value = current.slice(0, -1);
+    }
+
+    function insert(value) {
+      document.getElementById("result").value += value;
+    }
+
+    function calculate() {
+      const expression = document.getElementById("result").value;
+      try {
+        const result = eval(expression);
+        document.getElementById("result").value = result;
+      } catch (error) {
+        document.getElementById("result").value = "Error";
+      }
+    }
+  </script>
+</body>
+</html>
